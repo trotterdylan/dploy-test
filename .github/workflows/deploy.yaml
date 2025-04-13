@@ -1,18 +1,15 @@
 name: deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: peter-evans/create-deployment@v3
+      - uses: altinukshini/deployment-action@releases/v1
         with:
-          ref: ${{ github.sha }}
+          token: "${{ github.token }}"
           environment: production
-          transient_environment: false
-          auto_merge: false
